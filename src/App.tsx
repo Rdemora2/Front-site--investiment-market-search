@@ -1,51 +1,56 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import StockSearch from '@/components/stock-search'
+import PopularStocks from '@/components/popular-stocks'
+
+// Criando o cliente do React Query
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1
+    }
+  }
+})
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedStock, setSelectedStock] = useState<string>('')
+  
+  // Função para selecionar ação das populares
+  const handleSelectStock = (symbol: string) => {
+    setSelectedStock(symbol)
+    
+    // Rola a página para o componente de pesquisa
+    const searchElement = document.getElementById('stock-search-form')
+    if (searchElement) {
+      searchElement.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="flex gap-8 mb-8">
-        <a href="https://vite.dev" target="_blank" className="group">
-          <img 
-            src={viteLogo} 
-            className="h-24 p-6 transition-all will-change-auto group-hover:drop-shadow-[0_0_2em_#646cffaa]" 
-            alt="Vite logo" 
-          />
-        </a>
-        <a href="https://react.dev" target="_blank" className="group">
-          <img 
-            src={reactLogo} 
-            className="h-24 p-6 transition-all will-change-auto group-hover:drop-shadow-[0_0_2em_#61dafbaa] animate-spin" 
-            alt="React logo" 
-            style={{ animationDuration: '20s', animationIterationCount: 'infinite', animationTimingFunction: 'linear' }}
-          />
-        </a>
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen bg-background">
+        <header className="bg-primary text-primary-foreground py-8">
+          <div className="container mx-auto px-4">
+            <h1 className="text-3xl font-bold">Marketstack Explorer</h1>
+            <p className="mt-2">Pesquise e analise dados históricos de ações</p>
+          </div>
+        </header>
+        
+        <main className="container mx-auto px-4 py-8 space-y-8">
+          <PopularStocks onSelectStock={handleSelectStock} />
+            <div id="stock-search-form">
+            <StockSearch selectedStock={selectedStock} />
+          </div>
+        </main>
+        
+        <footer className="bg-muted py-6">
+          <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+            <p>Dados fornecidos pela API Marketstack &copy; {new Date().getFullYear()}</p>
+          </div>
+        </footer>
       </div>
-      <h1 className="text-4xl font-bold mb-8">Vite + React</h1>
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-center">Counter</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center gap-4">
-          <Button variant="default" size="lg" onClick={() => setCount((count) => count + 1)}>
-            Count is {count}
-          </Button>
-          <p className="text-center text-muted-foreground">
-            Edit <code className="text-primary font-mono bg-muted p-1 rounded">src/App.tsx</code> and save to test HMR
-          </p>
-        </CardContent>
-        <CardFooter>
-          <p className="text-sm text-muted-foreground w-full text-center">
-            Click on the Vite and React logos to learn more
-          </p>
-        </CardFooter>
-      </Card>
-    </div>
+    </QueryClientProvider>
   )
 }
 

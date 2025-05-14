@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
       (function() {
@@ -10,10 +10,8 @@
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const theme = savedTheme === "system" ? (prefersDark ? "dark" : "light") : savedTheme;
         document.documentElement.classList.add(theme);
-        // Aplicar uma classe que previna transições durante o carregamento inicial
         document.documentElement.classList.add('no-transitions');
         window.addEventListener('load', function() {
-          // Remover a classe após o carregamento completo para permitir transições
           setTimeout(function() {
             document.documentElement.classList.remove('no-transitions');
           }, 100);
@@ -32,10 +30,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Marketstack Explorer" />
     
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/assets/favicon/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="/src/assets/favicon/apple-touch-icon.png">
-    <link rel="mask-icon" href="/src/assets/favicon/safari-pinned-tab.svg" color="#2563eb">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2563eb">
     <meta name="msapplication-TileColor" content="#2563eb">
     
     <link rel="preconnect" href="https://api.marketstack.com" />

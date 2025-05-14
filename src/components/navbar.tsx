@@ -103,14 +103,14 @@ export function Navbar({
                 <div className="relative w-full h-full">
                   {/* Logo para tema claro */}
                   <img 
-                    src="/src/assets/logo-tivix-full-light.png" 
+                    src="/logo-tivix-full-light.png" 
                     alt="Tivix Logo" 
                     className="h-auto w-auto max-h-12 absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
                     style={{maxHeight: "45px"}}
                   />
                   {/* Logo para tema escuro */}
                   <img 
-                    src="/src/assets/logo-tivix-full.png" 
+                    src="/logo-tivix-full.png" 
                     alt="Tivix Logo" 
                     className="h-auto w-auto max-h-12 absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
                     style={{maxHeight: "45px"}}
@@ -148,14 +148,14 @@ export function Navbar({
                   <div className="relative w-full h-full">
                     {/* Logo para tema claro */}
                     <img 
-                      src="/src/assets/logo-tivix-full-light.png" 
+                      src="/logo-tivix-full-light.png" 
                       alt="Tivix Logo" 
                       className="h-auto w-auto max-h-10 absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
                       style={{maxHeight: "40px"}}
                     />
                     {/* Logo para tema escuro */}
                     <img 
-                      src="/src/assets/logo-tivix-full.png" 
+                      src="/logo-tivix-full.png" 
                       alt="Tivix Logo" 
                       className="h-auto w-auto max-h-10 absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
                       style={{maxHeight: "40px"}}
@@ -194,14 +194,14 @@ export function Navbar({
                           <div className="relative w-full h-full">
                             {/* Logo para tema claro */}
                             <img 
-                              src="/src/assets/logo-tivix-full-light.png" 
+                              src="/logo-tivix-full-light.png" 
                               alt="Tivix Logo" 
                               className="h-5 w-auto absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
                               style={{maxHeight: "45px"}}
                             />
                             {/* Logo para tema escuro */}
                             <img 
-                              src="/src/assets/logo-tivix-full.png" 
+                              src="/logo-tivix-full.png" 
                               alt="Tivix Logo" 
                               className="h-5 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
                               style={{maxHeight: "45px"}}

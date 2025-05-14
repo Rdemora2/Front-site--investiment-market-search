@@ -1,16 +1,11 @@
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import StockSearch from "@/components/stock-search";
-import PopularStocks from "@/components/popular-stocks";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-  },
-});
+import { useState, Suspense } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/query-client";
+import { 
+  LazyStockSearch as StockSearch, 
+  LazyPopularStocks as PopularStocks,
+  LoadingFallback 
+} from "@/components/lazy";
 
 function App() {
   const [selectedStock, setSelectedStock] = useState<string>("");
@@ -32,12 +27,14 @@ function App() {
             <h1 className="text-3xl font-bold">Marketstack Explorer</h1>
             <p className="mt-2">Pesquise e analise dados históricos de ações</p>
           </div>
-        </header>
-
-        <main className="container mx-auto px-4 py-8 space-y-8">
-          <PopularStocks onSelectStock={handleSelectStock} />
+        </header>        <main className="container mx-auto px-4 py-8 space-y-8">
+          <Suspense fallback={<LoadingFallback />}>
+            <PopularStocks onSelectStock={handleSelectStock} />
+          </Suspense>
           <div id="stock-search-form">
-            <StockSearch selectedStock={selectedStock} />
+            <Suspense fallback={<LoadingFallback />}>
+              <StockSearch selectedStock={selectedStock} />
+            </Suspense>
           </div>
         </main>
 

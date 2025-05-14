@@ -2,15 +2,32 @@ import axios from "axios";
 import type { MarketstackResponse, StockData } from "@/types/marketstack";
 import { StockResponseSchema } from "@/lib/schemas";
 
-const API_KEY = "48f0a76154c2af6b9195c4005ce5cc98";
-const BASE_URL = "https://api.marketstack.com/v2";
+const API_KEY = import.meta.env.VITE_MARKETSTACK_API_KEY || '';
+const BASE_URL = import.meta.env.VITE_MARKETSTACK_API_URL || '';
+const API_TIMEOUT = 10000
 
 const marketstackApi = axios.create({
   baseURL: BASE_URL,
+  timeout: API_TIMEOUT,
   params: {
     access_key: API_KEY,
   },
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
 });
+
+marketstackApi.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response && error.response.status === 429) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return marketstackApi.request(error.config);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export interface EndOfDayParams {
   symbols: string;

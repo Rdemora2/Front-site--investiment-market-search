@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEndOfDayData } from "@/hooks/use-marketstack-data";
+import { formatDate, formatDateUTC, formatNumber } from "@/lib/utils";
 
 interface StockSearchProps {
   selectedStock?: string;
@@ -18,16 +19,6 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
   const today = new Date();
   const lastWeek = new Date(today);
   lastWeek.setDate(lastWeek.getDate() - 7);
-  const formatDate = (date: Date): string => {
-    return date.toISOString().split("T")[0];
-  };
-
-  const formatDateUTC = (dateStr: string): string => {
-    const date = new Date(dateStr);
-    return `${String(date.getUTCDate()).padStart(2, "0")}/${String(
-      date.getUTCMonth() + 1
-    ).padStart(2, "0")}/${date.getUTCFullYear()}`;
-  };
 
   const [symbol, setSymbol] = useState<string>(selectedStock || "");
   const [dateFrom, setDateFrom] = useState<string>(formatDate(lastWeek));
@@ -43,7 +34,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
           date_from: formatDate(lastWeek),
           date_to: formatDate(today),
         }
-      : null
+      : null,
   );
 
   useEffect(() => {
@@ -182,9 +173,9 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                       </td>
                       <td className="border px-4 py-2 text-right">
                         {stock.close.toFixed(2)}
-                      </td>
+                      </td>{" "}
                       <td className="border px-4 py-2 text-right">
-                        {stock.volume.toLocaleString()}
+                        {formatNumber(stock.volume)}
                       </td>
                     </tr>
                   ))}

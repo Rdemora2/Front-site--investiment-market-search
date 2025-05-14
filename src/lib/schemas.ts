@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const StockDataSchema = z.object({
   open: z.number(),
@@ -19,18 +19,18 @@ export const StockDataSchema = z.object({
   price_currency: z.string().nullable(),
   symbol: z.string(),
   exchange: z.string(),
-  date: z.string()
+  date: z.string(),
 });
 
-export const MarketstackResponseSchema = <T extends z.ZodTypeAny>(schema: T) => 
+export const MarketstackResponseSchema = <T extends z.ZodTypeAny>(schema: T) =>
   z.object({
     pagination: z.object({
       limit: z.number(),
       offset: z.number(),
       count: z.number(),
-      total: z.number()
+      total: z.number(),
     }),
-    data: z.array(schema)
+    data: z.array(schema),
   });
 
 export const StockResponseSchema = MarketstackResponseSchema(StockDataSchema);

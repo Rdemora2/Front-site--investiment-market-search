@@ -1,6 +1,12 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { POPULAR_STOCK_SYMBOLS } from '@/constants/stocks';
-import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { POPULAR_STOCK_SYMBOLS } from "@/constants/stocks";
+import { Button } from "@/components/ui/button";
 
 interface PopularStocksProps {
   onSelectStock: (symbol: string) => void;
@@ -25,7 +31,9 @@ const PopularStocks = ({ onSelectStock }: PopularStocksProps) => {
               onClick={() => onSelectStock(stock.symbol)}
             >
               <span className="font-bold">{stock.symbol}</span>
-              <span className="text-xs text-muted-foreground">{stock.name}</span>
+              <span className="text-xs text-muted-foreground">
+                {stock.name}
+              </span>
             </Button>
           ))}
         </div>

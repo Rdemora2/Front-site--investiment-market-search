@@ -15,22 +15,18 @@ interface StockSearchProps {
 }
 
 const StockSearch = ({ selectedStock }: StockSearchProps) => {
-  // Obtém a data atual e a data de uma semana atrás para usar como padrão
   const today = new Date();
   const lastWeek = new Date(today);
   lastWeek.setDate(lastWeek.getDate() - 7);
-  // Formata as datas para o formato ISO (YYYY-MM-DD)
   const formatDate = (date: Date): string => {
     return date.toISOString().split("T")[0];
   };
-  
-  // Formata a data UTC retornada pela API para exibição no formato brasileiro
+
   const formatDateUTC = (dateStr: string): string => {
-    // A API retorna datas no formato "2024-05-14T00:00:00+0000"
-    // Precisamos criar a data explicitamente mantendo o fuso horário UTC
     const date = new Date(dateStr);
-    // Formatar como DD/MM/YYYY
-    return `${String(date.getUTCDate()).padStart(2, '0')}/${String(date.getUTCMonth() + 1).padStart(2, '0')}/${date.getUTCFullYear()}`;
+    return `${String(date.getUTCDate()).padStart(2, "0")}/${String(
+      date.getUTCMonth() + 1
+    ).padStart(2, "0")}/${date.getUTCFullYear()}`;
   };
 
   const [symbol, setSymbol] = useState<string>(selectedStock || "");
@@ -50,11 +46,9 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
       : null
   );
 
-  // Atualiza o símbolo quando selectedStock muda
   useEffect(() => {
     if (selectedStock) {
       setSymbol(selectedStock);
-      // Busca automaticamente os dados quando uma ação é selecionada
       setSearchParams({
         symbols: selectedStock,
         date_from: dateFrom,
@@ -63,7 +57,6 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
     }
   }, [selectedStock, dateFrom, dateTo]);
 
-  // Usa o hook personalizado para buscar dados
   const { data, isLoading, isError, error } = useEndOfDayData({
     symbols: searchParams?.symbols || "",
     date_from: searchParams?.date_from,
@@ -71,7 +64,6 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
     sort: "DESC",
   });
 
-  // Manipula o envio do formulário
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (symbol.trim()) {
@@ -174,7 +166,9 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                 </thead>
                 <tbody>
                   {data.data.map((stock) => (
-                    <tr key={stock.date} className="hover:bg-muted/30">                      <td className="border px-4 py-2">
+                    <tr key={stock.date} className="hover:bg-muted/30">
+                      {" "}
+                      <td className="border px-4 py-2">
                         {formatDateUTC(stock.date)}
                       </td>
                       <td className="border px-4 py-2 text-right">

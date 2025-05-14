@@ -2,11 +2,9 @@ import axios from "axios";
 import type { MarketstackResponse, StockData } from "@/types/marketstack";
 import { StockResponseSchema } from "@/lib/schemas";
 
-// Definindo a chave da API
 const API_KEY = "48f0a76154c2af6b9195c4005ce5cc98";
 const BASE_URL = "https://api.marketstack.com/v2";
 
-// Criação da instância do Axios com configuração básica
 const marketstackApi = axios.create({
   baseURL: BASE_URL,
   params: {
@@ -14,7 +12,6 @@ const marketstackApi = axios.create({
   },
 });
 
-// Interface para os parâmetros da requisição EOD
 export interface EndOfDayParams {
   symbols: string;
   date_from?: string;
@@ -24,7 +21,6 @@ export interface EndOfDayParams {
   sort?: "ASC" | "DESC";
 }
 
-// Interface para os parâmetros da requisição Intraday
 export interface IntradayParams extends EndOfDayParams {
   interval?:
     | "1min"
@@ -39,7 +35,6 @@ export interface IntradayParams extends EndOfDayParams {
     | "24hour";
 }
 
-// Função para buscar dados EOD (End of Day)
 export const getEndOfDayData = async (
   params: EndOfDayParams
 ): Promise<MarketstackResponse<StockData>> => {
@@ -51,7 +46,6 @@ export const getEndOfDayData = async (
       }
     );
 
-    // Validando a resposta com Zod
     const validatedData = StockResponseSchema.parse(response.data);
     return validatedData;
   } catch (error) {
@@ -67,7 +61,6 @@ export const getEndOfDayData = async (
   }
 };
 
-// Função para buscar dados intraday
 export const getIntradayData = async (
   params: IntradayParams
 ): Promise<MarketstackResponse<StockData>> => {
@@ -79,7 +72,6 @@ export const getIntradayData = async (
       }
     );
 
-    // Validando a resposta com Zod
     const validatedData = StockResponseSchema.parse(response.data);
     return validatedData;
   } catch (error) {

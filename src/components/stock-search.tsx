@@ -8,6 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useEndOfDayData } from "@/hooks/use-marketstack-data";
 import { formatDate, formatDateUTC, formatNumber } from "@/lib/utils";
 
@@ -141,46 +149,44 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
             <CardTitle>
               Dados de {searchParams?.symbols} ({data.data.length} resultados)
             </CardTitle>
-          </CardHeader>
-          <CardContent>
+          </CardHeader>          <CardContent>
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-muted/50">
-                    <th className="border px-4 py-2 text-left">Data</th>
-                    <th className="border px-4 py-2 text-right">Abertura</th>
-                    <th className="border px-4 py-2 text-right">Máxima</th>
-                    <th className="border px-4 py-2 text-right">Mínima</th>
-                    <th className="border px-4 py-2 text-right">Fechamento</th>
-                    <th className="border px-4 py-2 text-right">Volume</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="px-4 py-2 text-left">Data</TableHead>
+                    <TableHead className="px-4 py-2 text-right">Abertura</TableHead>
+                    <TableHead className="px-4 py-2 text-right">Máxima</TableHead>
+                    <TableHead className="px-4 py-2 text-right">Mínima</TableHead>
+                    <TableHead className="px-4 py-2 text-right">Fechamento</TableHead>
+                    <TableHead className="px-4 py-2 text-right">Volume</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {data.data.map((stock) => (
-                    <tr key={stock.date} className="hover:bg-muted/30">
-                      {" "}
-                      <td className="border px-4 py-2">
+                    <TableRow key={stock.date}>
+                      <TableCell className="px-4 py-2">
                         {formatDateUTC(stock.date)}
-                      </td>
-                      <td className="border px-4 py-2 text-right">
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">
                         {stock.open.toFixed(2)}
-                      </td>
-                      <td className="border px-4 py-2 text-right">
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">
                         {stock.high.toFixed(2)}
-                      </td>
-                      <td className="border px-4 py-2 text-right">
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">
                         {stock.low.toFixed(2)}
-                      </td>
-                      <td className="border px-4 py-2 text-right">
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">
                         {stock.close.toFixed(2)}
-                      </td>{" "}
-                      <td className="border px-4 py-2 text-right">
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">
                         {formatNumber(stock.volume)}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           </CardContent>
           <CardFooter>

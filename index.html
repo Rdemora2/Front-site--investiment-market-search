@@ -1,19 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      (function() {
+      (function () {
         const savedTheme = localStorage.getItem("theme") || "light";
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const theme = savedTheme === "system" ? (prefersDark ? "dark" : "light") : savedTheme;
         document.documentElement.classList.add(theme);
-        document.documentElement.classList.add('no-transitions');
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            document.documentElement.classList.remove('no-transitions');
+        document.documentElement.classList.add("no-transitions");
+        window.addEventListener("load", function () {
+          setTimeout(function () {
+            document.documentElement.classList.remove("no-transitions");
           }, 100);
         });
       })();
@@ -29,13 +29,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Tivix Finmarket Explorer" />
-    
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
-    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2563eb">
-    <meta name="msapplication-TileColor" content="#2563eb">
-    
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+
     <link rel="preconnect" href="https://api.marketstack.com" />
     <title>Tivix Finmarket Explorer</title>
   </head>

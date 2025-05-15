@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getEndOfDayData, getIntradayData } from "@/services/marketstack-api";
-import type {
-  EndOfDayParams,
-  IntradayParams,
-} from "@/services/marketstack-api";
+import type { EndOfDayParams, IntradayParams } from "@/services/marketstack-api";
 
 export function useEndOfDayData(params: EndOfDayParams) {
   return useQuery({

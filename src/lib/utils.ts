@@ -11,15 +11,13 @@ export function formatDate(date: Date): string {
 
 export function formatDateUTC(dateStr: string): string {
   const date = new Date(dateStr);
-  return `${String(date.getUTCDate()).padStart(2, "0")}/${String(
-    date.getUTCMonth() + 1
-  ).padStart(2, "0")}/${date.getUTCFullYear()}`;
+  return `${String(date.getUTCDate()).padStart(2, "0")}/${String(date.getUTCMonth() + 1).padStart(
+    2,
+    "0"
+  )}/${date.getUTCFullYear()}`;
 }
 
-export function formatCurrency(
-  value: number,
-  currency: string = "USD"
-): string {
+export function formatCurrency(value: number, currency: string = "USD"): string {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency,

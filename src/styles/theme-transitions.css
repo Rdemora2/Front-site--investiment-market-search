@@ -3,10 +3,13 @@
   transition: none !important;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  transition:
+    background-color 0.5s ease-in-out,
+    color 0.5s ease-in-out;
 }
 
 body {

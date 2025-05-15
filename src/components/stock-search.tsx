@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -42,7 +36,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
           date_from: formatDate(lastWeek),
           date_to: formatDate(today),
         }
-      : null,
+      : null
   );
 
   useEffect(() => {
@@ -82,7 +76,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="flex flex-col space-y-2">
                 <label htmlFor="symbol" className="text-sm font-medium">
                   Símbolo da Ação
@@ -91,7 +85,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                   id="symbol"
                   type="text"
                   placeholder="Ex: AAPL, MSFT, GOOGL"
-                  className="rounded-md border border-input bg-background px-3 py-2"
+                  className="border-input bg-background rounded-md border px-3 py-2"
                   value={symbol}
                   onChange={(e) => setSymbol(e.target.value)}
                   required
@@ -105,7 +99,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                 <input
                   id="dateFrom"
                   type="date"
-                  className="rounded-md border border-input bg-background px-3 py-2"
+                  className="border-input bg-background rounded-md border px-3 py-2"
                   value={dateFrom}
                   onChange={(e) => setDateFrom(e.target.value)}
                 />
@@ -118,7 +112,7 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                 <input
                   id="dateTo"
                   type="date"
-                  className="rounded-md border border-input bg-background px-3 py-2"
+                  className="border-input bg-background rounded-md border px-3 py-2"
                   value={dateTo}
                   onChange={(e) => setDateTo(e.target.value)}
                 />
@@ -133,11 +127,10 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
       </Card>
 
       {isError && (
-        <Card className="w-full bg-destructive/10">
+        <Card className="bg-destructive/10 w-full">
           <CardContent className="pt-6">
-            <p className="font-medium text-destructive">
-              Erro ao buscar dados:{" "}
-              {error instanceof Error ? error.message : "Erro desconhecido"}
+            <p className="text-destructive font-medium">
+              Erro ao buscar dados: {error instanceof Error ? error.message : "Erro desconhecido"}
             </p>
           </CardContent>
         </Card>
@@ -149,7 +142,8 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
             <CardTitle>
               Dados de {searchParams?.symbols} ({data.data.length} resultados)
             </CardTitle>
-          </CardHeader>          <CardContent>
+          </CardHeader>{" "}
+          <CardContent>
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
@@ -165,18 +159,14 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
                 <TableBody>
                   {data.data.map((stock) => (
                     <TableRow key={stock.date}>
-                      <TableCell className="px-4 py-2">
-                        {formatDateUTC(stock.date)}
-                      </TableCell>
+                      <TableCell className="px-4 py-2">{formatDateUTC(stock.date)}</TableCell>
                       <TableCell className="px-4 py-2 text-right">
                         {stock.open.toFixed(2)}
                       </TableCell>
                       <TableCell className="px-4 py-2 text-right">
                         {stock.high.toFixed(2)}
                       </TableCell>
-                      <TableCell className="px-4 py-2 text-right">
-                        {stock.low.toFixed(2)}
-                      </TableCell>
+                      <TableCell className="px-4 py-2 text-right">{stock.low.toFixed(2)}</TableCell>
                       <TableCell className="px-4 py-2 text-right">
                         {stock.close.toFixed(2)}
                       </TableCell>
@@ -190,9 +180,8 @@ const StockSearch = ({ selectedStock }: StockSearchProps) => {
             </div>
           </CardContent>
           <CardFooter>
-            <p className="text-sm text-muted-foreground">
-              Mostrando {data.pagination.count} de {data.pagination.total}{" "}
-              registros
+            <p className="text-muted-foreground text-sm">
+              Mostrando {data.pagination.count} de {data.pagination.total} registros
             </p>
           </CardFooter>
         </Card>

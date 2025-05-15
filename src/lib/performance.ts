@@ -54,11 +54,11 @@ export function memoize<T extends (...args: any[]) => any>(
 
   return (...args: Parameters<T>) => {
     const key = JSON.stringify(args);
-    
+
     if (cache.has(key)) {
       return cache.get(key)!;
     }
-    
+
     const result = fn(...args);
     cache.set(key, result);
     return result;
@@ -70,7 +70,7 @@ export function memoize<T extends (...args: any[]) => any>(
  */
 export function isElementInViewport(element: HTMLElement): boolean {
   const rect = element.getBoundingClientRect();
-  
+
   return (
     rect.top >= 0 &&
     rect.left >= 0 &&

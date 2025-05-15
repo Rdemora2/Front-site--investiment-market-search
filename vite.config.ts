@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Marketstack Explorer',
+        name: 'Tivix Finmarket Explorer',
         short_name: 'StockExplorer',
         description: 'Pesquise e analise dados históricos de ações',
         theme_color: '#2563eb',

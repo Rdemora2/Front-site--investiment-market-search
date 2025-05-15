@@ -84,87 +84,70 @@ export function Navbar({
   
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
-  };
-
-  return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+  };  return (    <header
+      className={`sticky top-0 z-40 w-full transition-all duration-300 min-h-[50px] py-[10px] ${
         scrolled
           ? "bg-muted/80 shadow-md backdrop-blur-md border-b border-muted dark:bg-muted/30"
           : "bg-muted/90 text-foreground dark:bg-background/80 dark:text-primary-foreground"
       } ${className}`}
-    >      <section className="py-4">
-        <div className="container">
-          {/* Desktop Menu */}
-          <nav className="hidden justify-between lg:flex h-20 items-center">
-            <div className="flex items-center gap-6">
-              {/* Logo com margem à esquerda adicionada */}
-              <a href="/" className="flex items-center gap-2 relative w-24 h-12 ml-4">
-                <div className="relative w-full h-full">
+    ><section className="flex items-center h-full">
+        <div className="container mx-auto px-6">{/* Desktop Menu */}<nav className="hidden lg:flex justify-between items-center min-h-[50px]">
+            {/* Logo na lateral esquerda */}            <a href="/" className="flex items-center justify-center relative w-auto h-[45px]">
+              <div className="relative w-auto h-[45px] flex items-center ml-2">
+                {/* Logo para tema claro */}
+                <img 
+                  src="/logo-tivix-full-light.png" 
+                  alt="Tivix Logo" 
+                  className="h-[45px] px-8 w-auto absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0 ml-[15px]"
+                />
+                {/* Logo para tema escuro */}
+                <img 
+                  src="/logo-tivix-full.png" 
+                  alt="Tivix Logo" 
+                  className="h-[45px] w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 ml-[15px]"
+                />
+              </div>
+            </a>
+              <div className="flex items-center justify-center gap-6">
+              {/* Itens de menu no meio */}
+              <NavigationMenu>
+                <NavigationMenuList className="flex items-center">
+                  {menu.map((item) => renderMenuItem(item))}
+                </NavigationMenuList>
+              </NavigationMenu>
+              
+              {/* ThemeToggle Button na lateral direita */}
+              <div className="flex items-center justify-center ml-6">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  onClick={toggleTheme}
+                  className="rounded-full w-9 h-9 bg-foreground/90 dark:bg-background/90 text-background dark:text-foreground border border-foreground/20 dark:border-background/20 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden"
+                  aria-label="Alternar tema"
+                >
+                  <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform duration-500 ease-out dark:rotate-90 dark:scale-0" />
+                  <MoonStar className="absolute h-5 w-5 rotate-90 scale-0 transition-transform duration-500 ease-out dark:rotate-0 dark:scale-100" />
+                </Button>
+              </div>
+            </div>
+          </nav>          {/* Mobile Menu */}
+          <div className="block lg:hidden">            <div className="flex items-center justify-between min-h-[50px]">{/* Logo à esquerda */}<a href="/" className="flex items-center justify-center relative w-auto h-[40px]">
+                <div className="relative w-auto h-[40px] flex items-center">
                   {/* Logo para tema claro */}
                   <img 
                     src="/logo-tivix-full-light.png" 
                     alt="Tivix Logo" 
-                    className="h-auto w-auto max-h-12 absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
-                    style={{maxHeight: "45px"}}
+                    className="h-[40px] w-auto absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0 ml-[15px]"
                   />
                   {/* Logo para tema escuro */}
                   <img 
                     src="/logo-tivix-full.png" 
                     alt="Tivix Logo" 
-                    className="h-auto w-auto max-h-12 absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
-                    style={{maxHeight: "45px"}}
+                    className="h-[40px] w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100 ml-[15px]"
                   />
                 </div>
               </a>
-              
-              <div className="flex items-center">
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    {menu.map((item) => renderMenuItem(item))}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </div>
-            </div>
-            <div className="flex gap-2 items-center">
-              {/* ThemeToggle Button com contraste melhorado */}
-              <Button 
-                variant="outline" 
-                size="icon" 
-                onClick={toggleTheme}
-                className="rounded-full w-9 h-9 bg-foreground/90 dark:bg-background/90 text-background dark:text-foreground border border-foreground/20 dark:border-background/20 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden"
-                aria-label="Alternar tema"
-              >
-                <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform duration-500 ease-out dark:rotate-90 dark:scale-0" />
-                <MoonStar className="absolute h-5 w-5 rotate-90 scale-0 transition-transform duration-500 ease-out dark:rotate-0 dark:scale-100" />
-              </Button>
-            </div>
-          </nav>          {/* Mobile Menu */}
-          <div className="block lg:hidden">
-            <div className="flex items-center justify-between h-16">
-              {/* Logo com margem à esquerda adicionada */}
-              <div className="flex items-center gap-2">
-                <a href="/" className="flex items-center gap-2 relative w-20 h-10 ml-2">
-                  <div className="relative w-full h-full">
-                    {/* Logo para tema claro */}
-                    <img 
-                      src="/logo-tivix-full-light.png" 
-                      alt="Tivix Logo" 
-                      className="h-auto w-auto max-h-10 absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
-                      style={{maxHeight: "40px"}}
-                    />
-                    {/* Logo para tema escuro */}
-                    <img 
-                      src="/logo-tivix-full.png" 
-                      alt="Tivix Logo" 
-                      className="h-auto w-auto max-h-10 absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
-                      style={{maxHeight: "40px"}}
-                    />
-                  </div>
-                </a>
-              </div>
-              
-              <div className="flex items-center gap-2">
+                {/* Botões à direita */}              <div className="flex items-center justify-center gap-2 mr-[15px]">
                 {/* ThemeToggle Button com contraste melhorado */}
                 <Button 
                   variant="outline" 
@@ -176,51 +159,6 @@ export function Navbar({
                   <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform duration-500 ease-out dark:rotate-90 dark:scale-0" />
                   <MoonStar className="absolute h-5 w-5 rotate-90 scale-0 transition-transform duration-500 ease-out dark:rotate-0 dark:scale-100" />
                 </Button>
-                
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button 
-                      variant="outline" 
-                      size="icon"
-                      className="bg-foreground/10 dark:bg-background/10 hover:bg-foreground/20 dark:hover:bg-background/20 text-foreground dark:text-background"
-                    >
-                      <Menu className="size-4" />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent className="overflow-y-auto">
-                    <SheetHeader>
-                      <SheetTitle>
-                        <a href="/" className="flex items-center gap-2 relative w-20 h-6">
-                          <div className="relative w-full h-full">
-                            {/* Logo para tema claro */}
-                            <img 
-                              src="/logo-tivix-full-light.png" 
-                              alt="Tivix Logo" 
-                              className="h-5 w-auto absolute top-0 left-0 transition-opacity duration-300 dark:opacity-0"
-                              style={{maxHeight: "45px"}}
-                            />
-                            {/* Logo para tema escuro */}
-                            <img 
-                              src="/logo-tivix-full.png" 
-                              alt="Tivix Logo" 
-                              className="h-5 w-auto absolute top-0 left-0 transition-opacity duration-300 opacity-0 dark:opacity-100"
-                              style={{maxHeight: "45px"}}
-                            />
-                          </div>
-                        </a>
-                      </SheetTitle>
-                    </SheetHeader>
-                    <div className="flex flex-col gap-6 p-4">
-                      <Accordion
-                        type="single"
-                        collapsible
-                        className="flex w-full flex-col gap-4"
-                      >
-                        {menu.map((item) => renderMobileMenuItem(item))}
-                      </Accordion>
-                    </div>
-                  </SheetContent>
-                </Sheet>
               </div>
             </div>
           </div>
@@ -230,11 +168,10 @@ export function Navbar({
   );
 }
 
-const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
+const renderMenuItem = (item: MenuItem) => {  if (item.items) {
     return (
       <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger className="bg-background/80 dark:bg-foreground/5 text-foreground dark:text-background hover:bg-muted/50 dark:hover:bg-foreground/10">{item.title}</NavigationMenuTrigger>
+        <NavigationMenuTrigger className="bg-background/80 dark:bg-foreground/5 text-foreground dark:text-background hover:bg-muted/50 dark:hover:bg-foreground/10 flex items-center">{item.title}</NavigationMenuTrigger>
         <NavigationMenuContent className="bg-background text-foreground dark:bg-foreground/5 dark:text-background">
           {item.items.map((subItem) => (
             <NavigationMenuLink asChild key={subItem.title} className="w-80">
@@ -245,12 +182,10 @@ const renderMenuItem = (item: MenuItem) => {
       </NavigationMenuItem>
     );
   }
-
   return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
+    <NavigationMenuItem key={item.title}>      <NavigationMenuLink
         href={item.url}
-        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background/80 dark:bg-foreground/5 px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-foreground dark:text-background"
+        className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background/80 dark:bg-foreground/5 px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground text-foreground dark:text-background flex items-center"
       >
         {item.title}
       </NavigationMenuLink>

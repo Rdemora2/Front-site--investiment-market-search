@@ -29,9 +29,8 @@ function App() {
   };
   return (    <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-background transition-colors duration-500 ease-in-out">
-        <Navbar />
-        <div className="bg-primary dark:bg-primary/90 text-primary-foreground py-7 bg-gradient-to-b from-primary to-primary/95 dark:from-primary/90 dark:to-primary/80"><div className="container mx-auto max-w-7xl">
-            <p className="text-lg md:text-xl font-light">Pesquise e analise dados históricos de ações utilizando a API Marketstack</p>
+        <Navbar />        <div className="bg-primary dark:bg-primary/90 text-primary-foreground py-7 bg-gradient-to-b from-primary to-primary/95 dark:from-primary/90 dark:to-primary/80"><div className="container mx-auto max-w-7xl">
+            <p className="text-lg md:text-xl font-light !p-4 !m-0 !mt-0 !mb-0" style={{margin: 0}}>Pesquise e analise dados históricos de ações utilizando nosso Finmarket Explorer</p>
           </div>
         </div>
         <main className="container mx-auto py-8 space-y-10 max-w-7xl">

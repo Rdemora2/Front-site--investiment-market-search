@@ -1,10 +1,10 @@
-# Marketstack Explorer
+# Tivix Finmarket Explorer
 
-<!-- ![Marketstack Explorer]() -->
+<!-- ![Tivix Finmarket Explorer]() -->
 
 ## About the Project
 
-Marketstack Explorer is a modern web application that allows users to search and analyze historical stock data using the Marketstack API. This intuitive interface provides access to financial data for over 30,000 stocks from more than 50 countries.
+Tivix Finmarket Explorer is a modern web application that allows users to search and analyze historical stock data using the Marketstack API. This intuitive interface provides access to financial data for over 30,000 stocks from more than 50 countries.
 
 ## Features
 

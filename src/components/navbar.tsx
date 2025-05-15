@@ -1,8 +1,7 @@
-import { Menu, MoonStar, Sun } from "lucide-react";
+import { MoonStar, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 
 import {
-  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
@@ -16,13 +15,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 type Theme = "dark" | "light" | "system";
 

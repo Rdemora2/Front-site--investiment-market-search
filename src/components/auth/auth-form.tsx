@@ -4,44 +4,36 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/contexts/auth-context";
 
-interface AuthFormProps {
-  mode: "login" | "register";
-}
-
-export function AuthForm({ mode }: AuthFormProps) {
+export function AuthForm() {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
   const { signIn, signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError(null);
 
     try {
-      if (mode === "login") {
-        await signIn(email, password);
-      } else {
+      if (isSignUp) {
         await signUp(email, password);
+      } else {
+        await signIn(email, password);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle>{mode === "login" ? "Login" : "Create Account"}</CardTitle>
+        <CardTitle>{isSignUp ? "Criar Conta" : "Entrar"}</CardTitle>
         <CardDescription>
-          {mode === "login" 
-            ? "Enter your credentials to access your account" 
-            : "Fill in your information to create a new account"}
+          {isSignUp
+            ? "Crie sua conta para começar a usar o Tivix Finmarket Explorer"
+            : "Entre com sua conta para continuar"}
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
@@ -53,21 +45,22 @@ export function AuthForm({ mode }: AuthFormProps) {
             <Input
               id="email"
               type="email"
-              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu@email.com"
               required
             />
           </div>
           <div className="space-y-2">
             <label htmlFor="password" className="text-sm font-medium">
-              Password
+              Senha
             </label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
               required
             />
           </div>
@@ -75,13 +68,17 @@ export function AuthForm({ mode }: AuthFormProps) {
             <p className="text-destructive text-sm">{error}</p>
           )}
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          <Button 
-            type="submit" 
-            className="w-full" 
-            disabled={loading}
+        <CardFooter className="flex flex-col space-y-4">
+          <Button type="submit" className="w-full">
+            {isSignUp ? "Criar Conta" : "Entrar"}
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            className="w-full"
+            onClick={() => setIsSignUp(!isSignUp)}
           >
-            {loading ? "Loading..." : mode === "login" ? "Sign In" : "Sign Up"}
+            {isSignUp ? "Já tem uma conta? Entre" : "Não tem uma conta? Cadastre-se"}
           </Button>
         </CardFooter>
       </form>

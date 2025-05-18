@@ -1,51 +1,17 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/lib/supabase";
-import { useAuth } from "@/contexts/auth-context";
+import { useState } from "react";
 
-interface FavoriteStock {
-  id: string;
+interface Stock {
   symbol: string;
   name: string;
-  user_id: string;
 }
 
 export function useFavoriteStocks() {
-  const { user } = useAuth();
-  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<Stock[]>([]);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["favoriteStocks", user?.id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("favorite_stocks")
-        .select("*")
-        .eq("user_id", user?.id);
-
-      if (error) throw error;
-      return data as FavoriteStock[];
-    },
-    enabled: !!user,
-  });
-
-  const toggleFavorite = async (stock: { symbol: string; name: string }) => {
-    if (!user) return;
-
-    const existing = data?.find((f) => f.symbol === stock.symbol);
-
-    if (existing) {
-      await supabase
-        .from("favorite_stocks")
-        .delete()
-        .eq("id", existing.id);
-    } else {
-      await supabase.from("favorite_stocks").insert({
-        user_id: user.id,
-        symbol: stock.symbol,
-        name: stock.name,
-      });
-    }
-
-    queryClient.invalidateQueries({ queryKey: ["favoriteStocks", user.id] });
+  const toggleFavorite = async (stock: Stock) => {
+    // Implementation will be added later
+    console.log("Toggle favorite:", stock);
   };
 
   return {

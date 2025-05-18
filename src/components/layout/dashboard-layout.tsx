@@ -1,26 +1,33 @@
+import { useState } from "react";
 import { Navbar } from "@/components/navbar";
-import { useAuth } from "@/contexts/auth-context";
+import { Sidebar } from "@/components/sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { user } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="container mx-auto px-4 py-8">
-        {children}
-      </main>
-      <footer className="bg-muted mt-auto py-6">
-        <div className="container mx-auto px-4">
-          <p className="text-muted-foreground text-center text-sm">
-            © {new Date().getFullYear()} Tivix Finmarket Explorer. All rights reserved.
-          </p>
-        </div>
-      </footer>
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar */}
+      <Sidebar open={sidebarOpen} onOpenChange={setSidebarOpen} />
+
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col">
+        <Navbar onMenuClick={() => setSidebarOpen(true)} />
+        
+        <main className="flex-1 px-4 py-8 md:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            {children}
+          </div>
+        </main>
+
+        <footer className="border-t bg-muted/40 px-4 py-6 text-center text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} Tivix Finmarket Explorer. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
   );
 }

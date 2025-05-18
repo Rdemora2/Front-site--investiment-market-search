@@ -6,7 +6,7 @@ const API_KEY = import.meta.env.VITE_MARKETSTACK_API_KEY || "";
 const BASE_URL = import.meta.env.VITE_MARKETSTACK_API_URL || "";
 const API_TIMEOUT = 10000;
 
-const marketstackApi = axios.create({
+export const marketstackApi = axios.create({
   baseURL: BASE_URL,
   timeout: API_TIMEOUT,
   params: {

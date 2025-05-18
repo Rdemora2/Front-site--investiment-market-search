@@ -1,21 +1,21 @@
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import React from 'react'
 
 interface StockNewsProps {
   symbol: string;
 }
 
 export function StockNews({ symbol }: StockNewsProps) {
-  if (!symbol) {
-    return (
-      <div className="text-center text-muted-foreground">
-        Selecione uma ação para ver as notícias
-      </div>
-    );
-  }
-
   return (
-    <div className="flex items-center justify-center py-8">
-      <LoadingSpinner />
+    <div className="space-y-4">
+      {symbol ? (
+        <p className="text-sm text-muted-foreground">
+          Carregando notícias para {symbol}...
+        </p>
+      ) : (
+        <p className="text-sm text-muted-foreground">
+          Selecione uma ação para ver as notícias relacionadas
+        </p>
+      )}
     </div>
-  );
+  )
 }
